@@ -16,7 +16,6 @@ exports.verify = async (req, res, next) => {
     }
 };
 
-
 exports.existUser = async (req, res, next) => {
     try {
         const email = req.body.email;

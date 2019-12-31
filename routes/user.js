@@ -7,21 +7,34 @@ const {
     sendMessage,
     myProfil,
     newsfeedContent,
-    searchUser
+    searchUser,
+    userSearchProfil,
+    userProfilNewsfeed
 } = require('../controllers/profil.controllers')
 
-router.post('/search', verify, searchUser, (req, res, next)=>{
-    
-})
+// HEADER COMPONENT : recherches d'utilisateurs.
+router.post('/search', verify, searchUser);
 
+// PROFIL COMPONENT : send les informations id, email pour profil
 router.get('/current', verify, myProfil, (req, res) => {
     res.json(req.userKey);
 });
 
+// PROFIL COMPONENT : newsfeed de son profil
+router.get('/user-newsfeed', verify, userProfilNewsfeed, (req, res) => {
+    console.log('test');
+});
+
+// SEARCH PROFIL COMPONENT : send les informations id, email pour profil
+router.post('/profilsearchnewsfeed', verify, userSearchProfil);
+
+
+// NEWSFEED COMPONENT : publier un message sur fil d'actu
 router.post('/message', verify, sendMessage, (req, res, next) => {
     res.json('envoyé');
 });
 
+// NEWSFEED COMPONENT : afficher le fil d'actu
 router.get('/newsfeed', verify, newsfeedContent);
 
 module.exports = router
